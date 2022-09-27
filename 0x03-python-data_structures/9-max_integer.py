@@ -7,4 +7,4 @@ def max_integer(my_list=[]):
                 biggest = i
         return biggest
     else:
-        return 
+        return None
