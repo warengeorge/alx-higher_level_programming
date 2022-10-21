@@ -1,0 +1,41 @@
+===========================
+2-say my name
+===========================
+Function
+========.
+function that prints my name is first name last name
+
+Operations
+==========
+first name and last name must be strings
+
+Import module:
+    >>> my_name = __import__('3-say_my_name').say_my_name
+
+Uses:
+
+Strings:
+    >>> my_name("Tamunomiebi", "George")
+    My name is Tamunomiebi George
+
+Diferent from string:
+    >>> my_name(12, "George")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+Diferent from string:
+    >>> my_name("Tamunomiebi", 12)
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+Empty:
+    >>> my_name()
+    Traceback (most recent call last):
+    ...
+    TypeError: say_my_name() missing 1 required positional argument: 'first_name'
+
+one parameter
+    >>> my_name("Tamunomiebi")
+    My name is Tamunomiebi
