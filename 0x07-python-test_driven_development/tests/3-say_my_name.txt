@@ -15,17 +15,17 @@ Import module:
 Uses:
 
 Strings:
-    >>> my_name("Tamunomiebi", "George")
-    My name is Tamunomiebi George
+    >>> my_name("Juan", "Perez")
+    My name is Juan Perez
 
 Diferent from string:
-    >>> my_name(12, "George")
+    >>> my_name(12, "Perez")
     Traceback (most recent call last):
     ...
     TypeError: first_name must be a string
 
 Diferent from string:
-    >>> my_name("Tamunomiebi", 12)
+    >>> my_name("Juan", 12)
     Traceback (most recent call last):
     ...
     TypeError: last_name must be a string
@@ -37,5 +37,5 @@ Empty:
     TypeError: say_my_name() missing 1 required positional argument: 'first_name'
 
 one parameter
-    >>> my_name("Tamunomiebi")
-    My name is Tamunomiebi
+    >>> my_name("Juan")
+    My name is Juan 
