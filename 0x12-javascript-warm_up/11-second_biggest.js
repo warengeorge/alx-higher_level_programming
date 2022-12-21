@@ -1,14 +1,8 @@
 #!/usr/bin/node
+const args = process.argv
+  .slice(2)
+  .map(arg => Number.parseInt(arg))
+  .sort((a, b) => b - a);
+const val = args.length < 2 ? 0 : args[1];
 
-const numsArray = process.argv.slice(2);
-function secondMax (array) {
-  if (array.length < 2) {
-    return (0);
-  } else {
-    array.sort((x, y) => x - y);
-    array.pop();
-    return (array.pop());
-  }
-}
-console.log(secondMax(numsArray));
-
+console.log(val);
