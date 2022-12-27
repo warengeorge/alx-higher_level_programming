@@ -1,31 +1,22 @@
 #!/usr/bin/python3
-"""
-Lists all states from the database hbtn_0e_0_usa
-Arguments:
-    mysql_username - username to connect the mySQL
-    mysql passwd - password to connect the mySQL
-    database_name - Name of the database
-         http://www.mikusa.com/python-mysql-docs/index.html
-"""
-
-
+'''Prints all rows in the states table of a database.
+'''
+import sys
 import MySQLdb
-from sys import argv
 
-if __name__ == "__main__":
-    mysql_username = argv[1]
-    mysql_password = argv[2]
-    database_name = argv[3]
 
-    db = MySQLdb.connect(host="localhost", port=3306,
-                         user=mysql_username, passwd=mysql_password,
-                         db=database_name, charset="utf8")
-    cur = db.cursor()
-    # The execute function requires one parameter, the query.
-    cur.execute("SELECT * FROM states ORDER BY id ASC")
-    all_rows = cur.fetchall()
-    for row in all_rows:
-        print(row)
-    cur.close()
-    db.close()
-
+if __name__ == '__main__':
+    if len(sys.argv) >= 4:
+        db_connection = MySQLdb.connect(
+            host='localhost',
+            port=3306,
+            user=sys.argv[1],
+            passwd=sys.argv[2],
+            db=sys.argv[3]
+        )
+        cursor = db_connection.cursor()
+        cursor.execute('SELECT * FROM states ORDER BY id ASC;')
+        results = cursor.fetchall()
+        for result in results:
+            print(result)
+        db_connection.close()
