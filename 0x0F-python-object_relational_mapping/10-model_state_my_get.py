@@ -1,30 +1,30 @@
 #!/usr/bin/python3
-"""
-Prints the State obj with name passed as arg from the database hbtn_0e_6_usa
-Arguments:
-    mysql_usr - username to connect the mySQL
-    mysql psw - password to connect the mySQL
-    db_name - Name of the database
-    st_name -state name to search
- https://docs.sqlalchemy.org/en/13/orm/tutorial.html
-"""
-
-
-from sys import argv
-from model_state import Base, State
+'''Prints the id of a State object with a given name in a database.
+'''
+import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-if __name__ == "__main__":
-    mysql_usr = argv[1]
-    mysql_pswd = argv[2]
-    db_name = argv[3]
-    st_name = argv[4]
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                           .format(mysql_usr, mysql_pswd, db_name),
-                           pool_pre_ping=True)
-    Base.metadata.create_all(engine)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    result_state = session.query(State).filter(State.name == st_name).first()
-    print(result_state.id if result_state else "Not found")
+from model_state import Base, State
+
+
+if __name__ == '__main__':
+    if len(sys.argv) >= 5:
+        user = sys.argv[1]
+        pword = sys.argv[2]
+        db_name = sys.argv[3]
+        state_name = sys.argv[4]
+        chk = map(lambda x: x.isalpha() or (x in (' ', '%', '_')), state_name)
+        if not all(chk):
+            state_name = ''
+        DATABASE_URL = "mysql://{}:{}@localhost:3306/{}".format(
+            user, pword, db_name
+        )
+        engine = create_engine(DATABASE_URL)
+        Base.metadata.create_all(engine)
+        session = sessionmaker(bind=engine)()
+        result = session.query(State).filter(State.name == state_name).first()
+        if result is not None:
+            print('{}'.format(result.id))
+        else:
+            print('Not found')

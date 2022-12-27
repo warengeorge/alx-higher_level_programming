@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 '''A module containing the State model.
 '''
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 
 Base = declarative_base()
@@ -24,4 +25,9 @@ class State(Base):
     name = Column(
         String(length=128),
         nullable=False
+    )
+    cities = relationship(
+        "City",
+        cascade="all, delete, delete-orphan",
+        backref="state"
     )
